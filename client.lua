@@ -1,5 +1,5 @@
 ESX = nil
-RMenu.Add('bnj', 'main', RageUI.CreateMenu("Armurie", "Catalogue Armes | Accesoires"))
+RMenu.Add('bnj', 'main', RageUI.CreateMenu("Armurerie", "Catalogue Armes | Accesoires"))
 RMenu.Add('bnj', 'armes', RageUI.CreateSubMenu(RMenu:Get('bnj', 'main'), "Armes", "Catalogue des Armes"))
 RMenu.Add('bnj', 'accessoires', RageUI.CreateSubMenu(RMenu:Get('bnj', 'main'), "Accessoires ", "Catalogue des Accessoires "))
 
