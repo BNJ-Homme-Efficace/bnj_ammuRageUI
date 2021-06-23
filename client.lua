@@ -139,7 +139,7 @@ Citizen.CreateThread(function()
                 RageUI.Button("Chargeur", "5 Chargeurs simples", {RightLabel = "~g~150$"}, true, function(Hovered, Active, Selected)
 
                       if (Selected) then
-                        TriggerServerEvent('bnj:clip')
+                        TriggerServerEvent('bnj:clip123')
                         local playerPed = GetPlayerPed(-1)
                         RequestAnimDict('weapons@pistol@')
                            while not HasAnimDictLoaded('weapons@pistol@') do

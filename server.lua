@@ -17,8 +17,8 @@ ESX.RegisterUsableItem('clip', function(source)
 end)
 
 
-RegisterNetEvent('bnj:clip')
-AddEventHandler('bnj:clip', function()
+RegisterNetEvent('bnj:clip123')
+AddEventHandler('bnj:clip123', function()
 
     local _source = source
     local xPlayer = ESX.GetPlayerFromId(source)
@@ -28,7 +28,7 @@ AddEventHandler('bnj:clip', function()
     if xMoney >= price then
 
         xPlayer.removeMoney(price)
-        xPlayer.addInventoryItem('clip', 5)
+       xPlayer.addInventoryItem('clip', 5)
         TriggerClientEvent('esx:showNotification', source, "~g~Achats~w~ effectué !")
     else
          TriggerClientEvent('esx:showNotification', source, "Vous n'avez assez ~r~d\'argent")
