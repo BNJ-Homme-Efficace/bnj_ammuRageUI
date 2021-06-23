@@ -1,4 +1,30 @@
 ESX = nil
+
+Citizen.CreateThread(function()
+    while ESX == nil do
+        TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+        Citizen.Wait(0)
+    end
+end)
+RegisterNetEvent('esx_clip:clipcli')
+AddEventHandler('esx_clip:clipcli', function()
+  ped = PlayerPedId()
+  if IsPedArmed(ped, 4) then
+    hash=GetSelectedPedWeapon(ped)
+    if hash~=nil then
+      TriggerServerEvent('esx_clip:remove')
+      AddAmmoToPed(PlayerPedId(), hash,25)
+      ESX.ShowNotification("tu as utilisé un chargeur") 
+      MakePedReload(ped)
+    else
+      ESX.ShowNotification("tu n'as pas d'arme en main")
+    end
+  else
+    ESX.ShowNotification("ce type de munition ne convient pas")
+  end
+end)
+
+
 RMenu.Add('bnj', 'main', RageUI.CreateMenu("Armurerie", "Catalogue Armes | Accesoires"))
 RMenu.Add('bnj', 'armes', RageUI.CreateSubMenu(RMenu:Get('bnj', 'main'), "Armes", "Catalogue des Armes"))
 RMenu.Add('bnj', 'accessoires', RageUI.CreateSubMenu(RMenu:Get('bnj', 'main'), "Accessoires ", "Catalogue des Accessoires "))
@@ -141,7 +167,7 @@ local position = {
     
     Citizen.CreateThread(function()
         while true do
-            Citizen.Wait(0)
+           local sleep = 500
     
             for k in pairs(position) do
     
@@ -149,12 +175,14 @@ local position = {
                 local dist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, position[k].x, position[k].y, position[k].z)
     
                 if dist <= 1.0 then
+                  sleep = 0
                     ESX.ShowHelpNotification("Appuyez sur ~INPUT_TALK~ pour parler avec le ~b~Vendeur")
                     if IsControlJustPressed(1,51) then
                         RageUI.Visible(RMenu:Get('bnj', 'main'), not RageUI.Visible(RMenu:Get('bnj', 'main')))
                     end
                 end
             end
+            Citizen.Wait(sleep)
         end
     end)
 
@@ -183,11 +211,4 @@ local position = {
         end
     end)
 
-    Citizen.CreateThread(function()
-        while ESX == nil do
-            TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-            Citizen.Wait(100)
-        end
-    end)
-    
-    
+  
